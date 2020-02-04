@@ -14,13 +14,3 @@ export const routes: Routes =[
     canActivate: [AuthGuard],
   },
 ];
-
-// @NgModule({
-//   imports: [
-//     RouterModule.forRoot(
-//       routes,
-//       { enableTracing: true } // <-- debugging purposes only
-//     )
-//   ],
-// })
-// export class RoutesModule { }
