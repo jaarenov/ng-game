@@ -1,11 +1,13 @@
 <div class="wrap">
-  <p>Sign In</p>
-  <label for="email"> Email:    
-    <input type="email" id="email">
-  </label>
-  <label for="password"> Password:
-    <input type="text" id="password">
-  </label>
-
-  <button (click)="login()">Sign In</button>
+  <form [formGroup]="form" (onSubmit)="onSubmit()">
+    <p>Sign In</p>
+    <label for="email"> Email:    
+      <input type="email" name="email" formControlName="email">
+    </label>
+    <label for="password"> Password:
+      <input type="text" name="password" formControlName="password">
+    </label>
+  
+    <button type="submit">Sign In</button>
+  </form>
 </div>
