@@ -11,11 +11,11 @@ import { User } from '../interfaces/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  users$: Observable<User[]>;
+  // users$: Observable<User[]>;
 
   constructor(private service: UserService) {}
 
   ngOnInit() {
-    this.users$ = this.service.getData();
+    // this.users$ = this.service.getData();
   }
 }

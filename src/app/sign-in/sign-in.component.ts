@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'sign-in',
@@ -9,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignInComponent {
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   login() {
     let creds = {
@@ -17,7 +19,10 @@ export class SignInComponent {
       password: 'test',
     };
 
-    this.auth.login(creds.username, creds.password);
+    this.auth.login(creds.username, creds.password).pipe(first())
+    .subscribe(
+      data => this.router.navigate(['/home']),
+    );
     console.log('>>> login ', creds);
   }
 }
