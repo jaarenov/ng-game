@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignInComponent {
 
-  constructor(private auth: AuthService ) {}
+  constructor(private auth: AuthService) {}
 
   login() {
     let creds = {
@@ -18,5 +18,6 @@ export class SignInComponent {
     };
 
     this.auth.login(creds.username, creds.password);
+    console.log('>>> login ', creds);
   }
 }

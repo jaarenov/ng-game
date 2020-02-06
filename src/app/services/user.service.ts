@@ -6,7 +6,7 @@ import { config } from '../config';
 
 @Injectable({ providedIn: 'root' })
 export class UserService { 
-  constructor( private http: HttpClient ) {}
+  constructor(private http: HttpClient) {}
 
   getData () {
     return this.http.get<User[]>(`${config.apiUrl}/users`);
