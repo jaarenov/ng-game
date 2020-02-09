@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'sign-in',
@@ -21,10 +21,8 @@ export class SignInComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('>>>', this.form.controls['email'].value);
-    this.createForm();
-
     this.auth.logout();
+    this.createForm();
   }
 
   createForm() {
@@ -34,16 +32,22 @@ export class SignInComponent implements OnInit {
     });
   }
 
+  get controls() {
+    return this.form.controls;
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
 
     this.auth.login(
-      this.form.controls.email.value,
-      this.form.controls.password.value,
+      this.controls.email.value,
+      this.controls.password.value,
     )
-    .pipe(first())
+    .pipe(
+      first(),
+    )
     .subscribe(
       data => this.router.navigate(['/home']),
     );

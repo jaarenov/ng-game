@@ -16,9 +16,8 @@ export class AuthService {
       return this.http.post<any>(`${config.apiUrl}/auth`, { username, password }).pipe(
 
           map(user => {
-            console.log('>>> auth login() ', user);
             if (user && user.token) {
-              localStorage.setItem('currentUser', JSON.stringify(user));
+              localStorage.setItem('user', JSON.stringify(user));
             }
             return user;
           })
@@ -26,6 +25,6 @@ export class AuthService {
     }
 
     logout() {
-      localStorage.removeItem('currentUser');
+      localStorage.removeItem('user');
     }
 }

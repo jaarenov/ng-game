@@ -1,13 +1,13 @@
 <div class="wrap">
-  <form [formGroup]="form" (onSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>Sign In</p>
     <label for="email"> Email:    
-      <input type="email" name="email" formControlName="email">
+      <input type="text" name="email" formControlName="email">
     </label>
     <label for="password"> Password:
       <input type="text" name="password" formControlName="password">
     </label>
-  
+    <div *ngIf="!form.valid && form.dirty"> Fill the missing fields</div>
     <button type="submit">Sign In</button>
   </form>
 </div>
