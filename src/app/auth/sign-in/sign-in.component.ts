@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { AuthService } from '../services/auth.service';
-import { first, tap } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'sign-in',
@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
       first(),
     )
     .subscribe(
-      () => this.router.navigate(['/home']),
+      data => this.router.navigate(['/home']),
     );
   }
 }

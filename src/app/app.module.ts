@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { BackendProvider } from './api/fake-backend';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
+
 import { AppComponent } from './app.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './sign-in/auth.guard';
-import { BackendProvider } from './fake-backend';
-import { tokenInterceptor } from './interceptors/token.intercerptor';
+import { AuthGuard } from './auth/auth.guard';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent,
     HomeComponent,
   ],
   imports: [
@@ -22,11 +22,14 @@ import { tokenInterceptor } from './interceptors/token.intercerptor';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AuthModule,
+  ],
+  exports: [
+    ReactiveFormsModule,
   ],
   providers: [
     AuthGuard,
     BackendProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: tokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
