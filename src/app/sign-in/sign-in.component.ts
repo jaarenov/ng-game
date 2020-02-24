@@ -19,7 +19,6 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
   ) {}
 
-
   ngOnInit() {
     this.auth.logout();
     this.createForm();
@@ -49,7 +48,7 @@ export class SignInComponent implements OnInit {
       first(),
     )
     .subscribe(
-      data => this.router.navigate(['/home']),
+      () => this.router.navigate(['/home']),
     );
   }
 }

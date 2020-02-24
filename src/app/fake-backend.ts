@@ -26,17 +26,16 @@ export class BackendInterceptor implements HttpInterceptor {
             lastName: this.testUser.lastName,
             token: 'kek',
           }
-          
+
           return of(new HttpResponse({ status: 200, body }));
         }
 
         // 2 API Endpoint - User info
-
-        if (request.url.endsWith('/users') && request.method === 'GET') {
-          if(request.headers.get('Authorization') === 'kek') {
-            return of(new HttpResponse({status: 200, body: [this.testUser]}));
-          } 
-        }
+        // if (request.url.endsWith('/users') && request.method === 'GET') {
+        //   if(request.headers.get('Authorization') === 'kek') {
+        //     return of(new HttpResponse({status: 200, body: [this.testUser]}));
+        //   } 
+        // }
       }
     ))
    }
