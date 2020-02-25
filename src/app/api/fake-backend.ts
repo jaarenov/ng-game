@@ -19,7 +19,9 @@ export class BackendInterceptor implements HttpInterceptor {
         // 1 API Endpoint - Auth
         if (request.url.endsWith('/auth') && request.method === 'POST') {
           console.log('>>> /auth', request.body);
-
+          const user = request.body;
+          const { username, password } = user;
+          
           let body = {
             username: this.testUser.username,
             firstName: this.testUser.firstName,
@@ -27,7 +29,12 @@ export class BackendInterceptor implements HttpInterceptor {
             token: 'kek',
           }
 
-          return of(new HttpResponse({ status: 200, body }));
+          if (this.testUser.username === username 
+            && this.testUser.password === password ) {
+              return of(new HttpResponse({ status: 200, body }));
+            } else {
+              return of(new HttpResponse({ status: 404 }));
+            }
         }
 
         // 2 API Endpoint - User info
