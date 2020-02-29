@@ -9,5 +9,10 @@
     </label>
     <div *ngIf="!form.valid && form.dirty"> Fill the missing fields</div>
     <button type="submit">Sign In</button>
+
+    <div>
+      Have no account yet?
+      <a [routerLink]="['/sign-up']">Sign Up now</a>
+    </div>
   </form>
 </div>
