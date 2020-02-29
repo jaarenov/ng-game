@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -41,7 +41,7 @@ export class SignInComponent implements OnInit {
     }
 
     this.auth.login(
-      this.controls.email.value,
+      this.controls.username.value,
       this.controls.password.value,
     )
     .pipe(

@@ -1,8 +1,8 @@
 <div class="wrap">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>Sign In</p>
-    <label for="email"> Email:    
-      <input type="text" name="email" formControlName="email">
+    <label for="username"> username:    
+      <input type="text" name="username" formControlName="username">
     </label>
     <label for="password"> Password:
       <input type="text" name="password" formControlName="password">
@@ -12,7 +12,8 @@
 
     <div>
       Have no account yet?
-      <a [routerLink]="['/sign-up']">Sign Up now</a>
+      <a routerLink="/sign-up">Sign Up</a>
+      now
     </div>
   </form>
 </div>
