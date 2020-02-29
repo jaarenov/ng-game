@@ -3,8 +3,6 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { User } from './user.model';
-
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
 @Injectable()
@@ -31,7 +29,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
         // 2 API Endpoint - Registration
         if (request.url.endsWith('/register') && method === 'POST') {
-          const { user: User } = body;
+          const { user } = body;
 
           if(users.find(el => el === user.username)) error({ message: 'Already registered user' });
           user.id = users.length + 1; 
