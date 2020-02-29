@@ -23,6 +23,10 @@ export class AuthService {
         })
       )
     }
+    
+    register() {
+      console.warn('auth service register');
+    }
 
     // Logout
     logout() {

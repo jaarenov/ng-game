@@ -29,7 +29,17 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  get controls() {
+    return this.form.controls;
+  }
+
   onSubmit() {
-    
+    // if (this.form.invalid) {
+    //   return;
+    // }
+
+    this.auth.register();
+
+    console.warn('sign-up: ', this.controls);
   }
 }
