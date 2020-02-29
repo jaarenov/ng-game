@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input {
+  display: block;
+  margin: 14px 0;
+  width: 180px;
+  padding: 6px 10px;
+  font-size: 16px;
+}

@@ -6,10 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from '../api/token.intercerptor';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

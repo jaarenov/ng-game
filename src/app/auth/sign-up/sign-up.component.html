@@ -1,0 +1,19 @@
+<div class="wrap">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p>Sign Up</p>
+    <label for="email"> Username:    
+      <input type="text" name="email" formControlName="username">
+    </label>
+    <label for="password"> Password:
+      <input type="text" name="password" formControlName="password">
+    </label>
+    <label for="firstName"> First Name:
+      <input type="text" name="firstName" formControlName="firstName">
+    </label>
+    <label for="lastName"> Last Name:
+      <input type="text" name="lastName" formControlName="lastName">
+    </label>
+    <div *ngIf="!form.valid && form.dirty"> Fill the missing fields</div>
+    <button type="submit">Sign Up</button>
+  </form>
+</div>
