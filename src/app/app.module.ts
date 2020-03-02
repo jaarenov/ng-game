@@ -10,12 +10,17 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
-
+import { NewGameComponent } from './new-game/new-game.component';
+import { AuthorComponent } from './author/author.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    NewGameComponent,
+    AuthorComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
