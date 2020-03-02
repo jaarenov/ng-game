@@ -8,7 +8,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('currentUser'));
 
     if (user && user.token) {
       request = request.clone({

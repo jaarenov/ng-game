@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,6 +16,7 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -34,12 +37,19 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.form.invalid) {
-    //   return;
-    // }
+    if (this.form.invalid) {
+      return;
+    }
 
-    this.auth.register();
-
-    console.warn('sign-up: ', this.controls);
+    this.auth.register(
+      this.controls.username.value,
+      this.controls.password.value,
+      this.controls.firstName.value,
+      this.controls.lastName.value,
+    ).pipe(
+      first(),
+    ).subscribe(
+      data => this.router.navigate(['/sign-in']),
+    );
   }
 }

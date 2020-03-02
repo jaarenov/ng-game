@@ -14,28 +14,35 @@ export class BackendInterceptor implements HttpInterceptor {
       mergeMap(() => {
         // 1 API Endpoint - Auth
         if (url.endsWith('/auth') && method === 'POST') {
-          console.log('>>> /auth', body);
-          const { username, password } = body;
+          const { username, password, firstName, lastName } = body;
 
           if(users.find(el => el.username === username && el.password === password)) {
             return ok({
-              username: username,
-              // firstName: this.firstName,
-              // lastName: this.lastName,
+              username,
+              firstName,
+              lastName,
               token: 'fake-jwt',
             });
-          } else return error({status: 404, message: 'Usernme has benn already taken'});
+          } else return error('User was not found');
         }
 
         // 2 API Endpoint - Registration
         if (request.url.endsWith('/register') && method === 'POST') {
-          const { user } = body;
+          let user = body;
 
-          if(users.find(el => el === user.username)) error({ message: 'Already registered user' });
-          user.id = users.length + 1; 
-          // user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
+          console.warn('>>> register fakebakend: ', users.find(item => item.username === user.username));
+
+          if (users.find(item => item.username === user.username)) {
+            console.warn('>>> found user');
+            return error(`${user.username} has already been taken`);
+          }
+
+          console.warn('>>> after check');
+          user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
           users.push(user);
           localStorage.setItem('users', JSON.stringify(users));
+
+          return ok();
         }
 
 
@@ -43,26 +50,9 @@ export class BackendInterceptor implements HttpInterceptor {
           return of(new HttpResponse({ status: 200, body }));
         }
 
-        function error(status?, message?) {
-          return throwError({ status, message }); 
+        function error(message) {
+          return throwError({ message }); 
         }
-
-        // function isLoggedIn() {
-        //   return (headers.get('Authorization') === 'Bearer fake-jwt');
-        // }
-
-
-
-
-
-
-      
-        // 2 API Endpoint - User info
-        // if (request.url.endsWith('/users') && request.method === 'GET') {
-        //   if(request.headers.get('Authorization') === 'kek') {
-        //     return of(new HttpResponse({status: 200, body: [this.testUser]}));
-        //   } 
-        // }
       }
     ))
    }

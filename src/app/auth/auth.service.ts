@@ -11,25 +11,28 @@ import { User } from '../api/user.model';
 export class AuthService {
     constructor (private http: HttpClient) {}
 
-    // Login
     login(username: string, password: string): Observable<User[]> {
       return this.http.post<any>(`${config.apiUrl}/auth`, { username, password }).pipe(
         tap(v => console.warn('>>> auth api response: ', v)),
         map(user => {
           if (user && user.token) {
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('currentUser', JSON.stringify(user));
           }
           return user;
         })
       )
     }
     
-    register() {
-      console.warn('auth service register');
+    register(
+      username: string,
+      password: string,
+      firstName: string,
+      lastName: string,
+    ): Observable<User[]> {
+      return this.http.post<any>(`${config.apiUrl}/register`, { username, password, firstName, lastName });
     }
 
-    // Logout
     logout() {
-      // localStorage.removeItem('user');
+      localStorage.removeItem('currentUser');
     }
 }
