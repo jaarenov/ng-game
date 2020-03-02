@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
       first(),
     )
     .subscribe(
+      // data => console.warn('>>>>> signin tap', data),
       data => this.router.navigate(['/home']),
     );
   }
