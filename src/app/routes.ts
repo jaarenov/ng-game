@@ -27,7 +27,7 @@ export const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent,
-  }
+  },
   {
     path: 'new-game',
     component: NewGameComponent,
@@ -39,5 +39,5 @@ export const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
-  }
+  },
 ];
