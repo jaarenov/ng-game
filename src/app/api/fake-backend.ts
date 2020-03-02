@@ -30,14 +30,10 @@ export class BackendInterceptor implements HttpInterceptor {
         if (request.url.endsWith('/register') && method === 'POST') {
           let user = body;
 
-          console.warn('>>> register fakebakend: ', users.find(item => item.username === user.username));
-
           if (users.find(item => item.username === user.username)) {
-            console.warn('>>> found user');
             return error(`${user.username} has already been taken`);
           }
 
-          console.warn('>>> after check');
           user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
           users.push(user);
           localStorage.setItem('users', JSON.stringify(users));

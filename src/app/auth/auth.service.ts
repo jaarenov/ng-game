@@ -13,7 +13,6 @@ export class AuthService {
 
     login(username: string, password: string): Observable<User[]> {
       return this.http.post<any>(`${config.apiUrl}/auth`, { username, password }).pipe(
-        tap(v => console.warn('>>> auth api response: ', v)),
         map(user => {
           if (user && user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
