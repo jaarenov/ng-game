@@ -5,7 +5,7 @@ import { config } from '../api/config';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { User } from '../api/user.model';
+import { User } from '../api/user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
