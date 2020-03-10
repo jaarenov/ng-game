@@ -8,7 +8,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [];
 @Injectable()
 export class BackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const { body, url, method, headers } = request;
+    const { body, url, method } = request;
 
     return of(null).pipe(
       mergeMap(() => {
@@ -41,7 +41,6 @@ export class BackendInterceptor implements HttpInterceptor {
           return ok();
         }
 
-
         function ok(body?) {
           return of(new HttpResponse({ status: 200, body }));
         }
@@ -57,5 +56,5 @@ export class BackendInterceptor implements HttpInterceptor {
 export let BackendProvider = {
   provide: HTTP_INTERCEPTORS,
   useClass: BackendInterceptor,
-  multi: true
+  multi: true,
 };

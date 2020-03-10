@@ -40,11 +40,12 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    this.auth.login(
-      this.controls.username.value,
-      this.controls.password.value,
-    )
-    .pipe(
+    const credentials = { 
+      username: this.controls.username.value,
+      password: this.controls.password.value,
+     };
+
+    this.auth.login(credentials).pipe(
       first(),
     )
     .subscribe(

@@ -7,11 +7,11 @@ import { NewGameComponent } from './new-game/new-game.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthorComponent } from './author/author.component';
 
-
 import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-  { path: '', 
+  { 
+    path: '', 
     redirectTo: 'sign-in',
     pathMatch: 'full',
   },

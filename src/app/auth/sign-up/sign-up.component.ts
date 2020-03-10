@@ -20,10 +20,6 @@ export class SignUpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createForm();
-  }
-
-  createForm() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -41,12 +37,14 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.auth.register(
-      this.controls.username.value,
-      this.controls.password.value,
-      this.controls.firstName.value,
-      this.controls.lastName.value,
-    ).pipe(
+    const user = {
+      username: this.controls.username.value,
+      password: this.controls.password.value,
+      firstName: this.controls.firstName.value,
+      lastName: this.controls.lastName.value,
+    }
+
+    this.auth.register(user).pipe(
       first(),
     ).subscribe(
       data => this.router.navigate(['/sign-in']),

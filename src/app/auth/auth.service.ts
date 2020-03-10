@@ -11,8 +11,8 @@ import { User } from '../api/user.model';
 export class AuthService {
     constructor (private http: HttpClient) {}
 
-    login(username: string, password: string): Observable<User[]> {
-      return this.http.post<any>(`${config.apiUrl}/auth`, { username, password }).pipe(
+    login(credentials): Observable<User[]> {
+      return this.http.post<any>(`${config.apiUrl}/auth`, credentials).pipe(
         map(user => {
           if (user && user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -22,13 +22,8 @@ export class AuthService {
       )
     }
     
-    register(
-      username: string,
-      password: string,
-      firstName: string,
-      lastName: string,
-    ): Observable<User[]> {
-      return this.http.post<any>(`${config.apiUrl}/register`, { username, password, firstName, lastName });
+    register(user): Observable<User[]> {
+      return this.http.post<any>(`${config.apiUrl}/register`, user);
     }
 
     logout() {
