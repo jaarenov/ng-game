@@ -20,15 +20,11 @@ export class SignInComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.auth.logout();
-    this.createForm();
-  }
-
-  createForm() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.auth.logout();
   }
 
   get controls() {
