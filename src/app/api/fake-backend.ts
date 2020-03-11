@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, find, first } from 'rxjs/operators';
+import { BoundAttribute } from '@angular/compiler/src/render3/r3_ast';
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -14,13 +15,16 @@ export class BackendInterceptor implements HttpInterceptor {
       mergeMap(() => {
         // 1 API Endpoint - Auth
         if (url.endsWith('/auth') && method === 'POST') {
-          const { username, password, firstName, lastName } = body;
+          const { username, password } = body;
+          const currentUser =
+            users.find(el => el.username === username && el.password === password);
 
-          if(users.find(el => el.username === username && el.password === password)) {
+          if (currentUser) {
             return ok({
-              username,
-              firstName,
-              lastName,
+              id: currentUser.id,
+              username: currentUser.username,
+              firstName: currentUser.firstName,
+              lastName: currentUser.lastName,
               token: 'fake-jwt',
             });
           } else return error('User was not found');
