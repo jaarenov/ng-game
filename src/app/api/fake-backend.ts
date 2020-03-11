@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { mergeMap, find, first } from 'rxjs/operators';
-import { BoundAttribute } from '@angular/compiler/src/render3/r3_ast';
+import { mergeMap } from 'rxjs/operators';
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
