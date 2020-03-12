@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
+
+import { ok, error } from './utils';
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -37,19 +39,11 @@ export class BackendInterceptor implements HttpInterceptor {
             return error(`${user.username} has already been taken`);
           }
 
-          user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
+          user.id = users.length ? Math.max(...users.map(item => item.id)) + 1 : 1;
           users.push(user);
           localStorage.setItem('users', JSON.stringify(users));
 
-          return ok({...user, token: 'fake-jwt'});
-        }
-
-        function ok(body?) {
-          return of(new HttpResponse({ status: 200, body }));
-        }
-
-        function error(message) {
-          return throwError({ message }); 
+          return ok({ ...user, token: 'fake-jwt' });
         }
       }
     ))
