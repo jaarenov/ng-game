@@ -41,7 +41,7 @@ export class BackendInterceptor implements HttpInterceptor {
           users.push(user);
           localStorage.setItem('users', JSON.stringify(users));
 
-          return ok();
+          return ok({...user, token: 'fake-jwt'});
         }
 
         function ok(body?) {

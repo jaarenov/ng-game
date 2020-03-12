@@ -47,8 +47,7 @@ export class SignUpComponent implements OnInit {
     this.auth.register(user).pipe(
       first(),
     ).subscribe(
-      // TODO: Should login user after registration and navigate to home page
-      data => this.router.navigate(['/sign-in']),
+      data => this.router.navigate(['/home']),
     );
   }
 }
